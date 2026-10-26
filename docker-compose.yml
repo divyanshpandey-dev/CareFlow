@@ -1,0 +1,44 @@
+# CareFlow Docker Compose
+# Note: To use local Ollama inference, ensure Ollama is running on your host machine:
+#   $ ollama run llama3
+# Backend connects to host Ollama daemon via http://host.docker.internal:11434
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: careflow-backend
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - PORT=8000
+      - HOST=0.0.0.0
+      - DATABASE_URL=sqlite+aiosqlite:///data/careflow.db
+      - ENVIRONMENT=production
+      - OLLAMA_BASE_URL=http://host.docker.internal:11434
+      - OLLAMA_MODEL=llama3
+      - OLLAMA_TIMEOUT=30.0
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - careflow-data:/app/data
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: careflow-frontend
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - NEXT_PUBLIC_API_URL=http://localhost:8000/api/v1
+    depends_on:
+      - backend
+
+volumes:
+  careflow-data:
+    driver: local

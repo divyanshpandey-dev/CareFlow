@@ -1,0 +1,34 @@
+services:
+  # CareFlow FastAPI Backend Web Service
+  - type: web
+    name: careflow-backend
+    runtime: python
+    region: oregon
+    plan: free
+    buildCommand: pip install -r backend/requirements.txt
+    startCommand: uvicorn backend.app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.0
+      - key: PYTHONPATH
+        value: .
+      - key: ENVIRONMENT
+        value: production
+
+  # CareFlow Next.js Frontend Static / Web Service
+  - type: web
+    name: careflow-frontend
+    runtime: node
+    region: oregon
+    plan: free
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_VERSION
+        value: 20.10.0
+      - key: NEXT_PUBLIC_API_URL
+        fromService:
+          type: web
+          name: careflow-backend
+          property: host

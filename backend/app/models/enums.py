@@ -1,0 +1,113 @@
+import enum
+
+
+class UserRole(str, enum.Enum):
+    PATIENT = "PATIENT"
+    DOCTOR = "DOCTOR"
+    RECEPTIONIST = "RECEPTIONIST"
+    LAB_TECH = "LAB_TECH"
+    HOSPITAL_ADMIN = "HOSPITAL_ADMIN"
+    SUPER_ADMIN = "SUPER_ADMIN"
+
+
+class Gender(str, enum.Enum):
+    MALE = "MALE"
+    FEMALE = "FEMALE"
+    OTHER = "OTHER"
+
+
+class AppointmentType(str, enum.Enum):
+    NEW_CONSULT = "NEW_CONSULT"
+    FOLLOW_UP = "FOLLOW_UP"
+    REPORT_REVIEW = "REPORT_REVIEW"
+    PROCEDURE = "PROCEDURE"
+
+
+class AppointmentStatus(str, enum.Enum):
+    CONFIRMED = "CONFIRMED"
+    CHECKED_IN = "CHECKED_IN"
+    IN_QUEUE = "IN_QUEUE"
+    IN_CONSULTATION = "IN_CONSULTATION"
+    COMPLETED = "COMPLETED"
+    CANCELLED = "CANCELLED"
+    NO_SHOW = "NO_SHOW"
+
+
+class QueueState(str, enum.Enum):
+    CHECKED_IN = "CHECKED_IN"
+    WAITING = "WAITING"
+    CALLED = "CALLED"
+    IN_CONSULTATION = "IN_CONSULTATION"
+    COMPLETED = "COMPLETED"
+    ON_HOLD = "ON_HOLD"
+    NO_SHOW = "NO_SHOW"
+
+
+class MedicineFormulation(str, enum.Enum):
+    TABLET = "TABLET"
+    CAPSULE = "CAPSULE"
+    SYRUP = "SYRUP"
+    INJECTION = "INJECTION"
+    OINTMENT = "OINTMENT"
+    DROPS = "DROPS"
+    INHALER = "INHALER"
+
+
+class LabOrderPriority(str, enum.Enum):
+    ROUTINE = "ROUTINE"
+    URGENT = "URGENT"
+    STAT = "STAT"
+
+
+class LabOrderStatus(str, enum.Enum):
+    ORDERED = "ORDERED"
+    SAMPLE_COLLECTED = "SAMPLE_COLLECTED"
+    PROCESSING = "PROCESSING"
+    VERIFIED = "VERIFIED"
+    CANCELLED = "CANCELLED"
+
+
+class JourneyStatus(str, enum.Enum):
+    ACTIVE = "ACTIVE"
+    COMPLETED = "COMPLETED"
+    ARCHIVED = "ARCHIVED"
+
+
+class JourneyEventType(str, enum.Enum):
+    APPOINTMENT_BOOKED = "APPOINTMENT_BOOKED"
+    CHECKED_IN = "CHECKED_IN"
+    CONSULTATION_HELD = "CONSULTATION_HELD"
+    PRESCRIPTION_ISSUED = "PRESCRIPTION_ISSUED"
+    LAB_TEST_ORDERED = "LAB_TEST_ORDERED"
+    SAMPLE_COLLECTED = "SAMPLE_COLLECTED"
+    LAB_REPORT_READY = "LAB_REPORT_READY"
+    DOCTOR_REVIEWED = "DOCTOR_REVIEWED"
+    CARE_GOAL_MET = "CARE_GOAL_MET"
+
+
+class JourneyEventStatus(str, enum.Enum):
+    PENDING = "PENDING"
+    IN_PROGRESS = "IN_PROGRESS"
+    COMPLETED = "COMPLETED"
+    SKIPPED = "SKIPPED"
+
+
+class ConsentPurpose(str, enum.Enum):
+    CARE_MANAGEMENT = "CARE_MANAGEMENT"
+    SECOND_OPINION = "SECOND_OPINION"
+    DIAGNOSTIC_EVALUATION = "DIAGNOSTIC_EVALUATION"
+    EMERGENCY = "EMERGENCY"
+
+
+class ConsentStatus(str, enum.Enum):
+    REQUESTED = "REQUESTED"
+    GRANTED = "GRANTED"
+    DENIED = "DENIED"
+    REVOKED = "REVOKED"
+    EXPIRED = "EXPIRED"
+
+
+class AuditActionStatus(str, enum.Enum):
+    SUCCESS = "SUCCESS"
+    FAILURE = "FAILURE"
+    DENIED = "DENIED"
